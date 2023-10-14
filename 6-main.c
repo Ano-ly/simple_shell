@@ -23,9 +23,13 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 	size_t size;
 	char **arr;
 
+	int i = 0;
+	buffer = NULL;
 	size = 0;
+	arr = NULL;
+	get_value = 0;
 
-	while (1)
+	while (i < 5)
 	{
 		_putchar('_');
 		_putchar('$');
@@ -36,9 +40,13 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 		buffer = strtok(buffer, "\n");
 
 		if (get_value == -1)
+		{
 			perror("Could not get line");
+			exit(EXIT_FAILURE);
+		}
 		arr = split_string(buffer);
 		is_exit_is_env(arr, envp);
+		i++;
 	}
 	return (0);
 }
@@ -73,6 +81,7 @@ void not_builtin_for_path(char **arr, char **envp)
 		else
 		{
 			wait(&status);
+			free(arr);
 		}
 	}
 	else if (comm_type == 0)

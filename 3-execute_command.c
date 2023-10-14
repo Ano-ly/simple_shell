@@ -128,6 +128,7 @@ char **create_new_array(char *comm_path, char **arr)
 		i++;
 	}
 	new_arr[i] = NULL;
+	free(arr);
 	return (new_arr);
 }
 
