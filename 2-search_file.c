@@ -2,7 +2,6 @@
 #include <dirent.h>
 #include <string.h>
 #include "main.h"
-#include "tests.h"
 
 /**
  * is_path_is_exist - checks if command is a path to a file or a

@@ -30,13 +30,14 @@ int _strcmp(char *s1, char *s2);
 char **split_string(char *str);
 int _strlen(char *str);
 int _putchar(char c);
-int _strlen(char *str);
+char *_memcpy(char *dest, char *src, unsigned int n);
 
 void execute(char *comm_path, char **arr);
 void exec_chdir(char *comm, char **arr, char *dir);
 char *create_command_path(char *comm, char *dir);
 char **create_new_array(char *comm_path, char **arr);
 
+void is_exit_is_env(char **arr, char **envp);
 void built_env(char **env_t);
 void exit_shell(char **arr);
 
@@ -46,4 +47,6 @@ int get_start(char *str);
 int get_end(char *str, int start);
 int get_sign(char *str, int start);
 
+void not_builtin_for_path(char **arr, char **envp __attribute__((unused)));
+void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)));
 #endif /*MAIN_H*/

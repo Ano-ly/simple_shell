@@ -121,19 +121,14 @@ int _atoi(char *s)
 {
 	if (get_start(s) != -1)
 	{
-		int exp;
-		int number;
 		int _int;
-		int start;
-		int end;
-		int sign;
 		int i;
 
-		start = get_start(s);
-		end = get_end(s, start);
-		sign = get_sign(s, start);
-		number = 0;
-		exp = end - start - 1;
+		int start = get_start(s);
+		int end = get_end(s, start);
+		int sign = get_sign(s, start);
+		int number = 0;
+		int exp = end - start - 1;
 
 		for (i = start; i < end; i++)
 		{
