@@ -11,12 +11,12 @@
 
 void is_exit_is_env(char **arr, char **envp)
 {
-	if (_strcmp(arr[0], "exit") == 1)
+	if (_strcmp(arr[0], "exit") == 0)
 	{
 		printf("About to exit shell...");
 		exit_shell(arr);
 	}
-	else if (_strcmp(arr[0], "env") == 1)
+	else if (_strcmp(arr[0], "env") == 0)
 	{
 		if (arr[1] == NULL)
 			built_env(envp);
@@ -43,10 +43,10 @@ void built_env(char **env_t)
 	char *var;
 
 	i = 0;
-	j = 0;
 
 	while (env_t[i] != NULL)
 	{
+		j = 0;
 		var = env_t[i];
 		while (var[j] != '\0')
 		{

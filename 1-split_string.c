@@ -18,9 +18,9 @@
 char **split_string(char *str)
 {
 	char *word;
-	int i;
-	char **array;
 	char *str_dup;
+	char **array;
+	int i;
 	int count;
 	int len;
 
@@ -51,7 +51,6 @@ char **split_string(char *str)
 	{
 		array[i] = word;
 		word = strtok(NULL, " ");
-
 	}
 	array[count] = (char *)NULL;
 	free(str_dup);
