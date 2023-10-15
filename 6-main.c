@@ -25,22 +25,23 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 
 	int i = 0;
 	size = 0;
+	buffer = NULL;
 
-	while (i < 5)
+	while (1)
 	{
-		_putchar('_');
 		_putchar('$');
 		_putchar(' ');
 		get_value = getline(&buffer, &size, stdin);
-		if (_strcmp(buffer, "\n") == 1)
-			continue;
-		buffer = strtok(buffer, "\n");
-
 		if (get_value == -1)
 		{
-			perror("Could not get line");
-			exit(EXIT_FAILURE);
+			break;
 		}
+		if (buffer[0] == '\0' || buffer[0] == '\n')
+			continue;
+		printf("Buffer: %so", buffer);
+		buffer = strtok(buffer, "\n");
+		printf("Buffer: %so", buffer);
+
 		arr = split_string(buffer);
 		is_exit_is_env(arr, envp);
 		i++;

@@ -147,6 +147,9 @@ int _strcmp(char *s1, char *s2)
 	int schoose;
 	int s2l;
 
+	if (s1 == NULL || s2 == NULL)
+		return (-1);
+
 	s1l = _strlen(s1);
 	s2l = _strlen(s2);
 

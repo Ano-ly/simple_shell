@@ -21,12 +21,14 @@ char **split_string(char *str)
 	int i;
 	char **array;
 	char *str_dup;
-
-	int count = 0;
-	int len = _strlen(str);
+	int count;
+	int len;
 
 	if (str == NULL)
 		return (NULL);
+
+	count = 0;
+	len = _strlen(str);
 
 	str_dup = malloc(len + 1);
 	if (str_dup == NULL)
@@ -67,6 +69,9 @@ int _strlen(char *str)
 {
 	int i;
 	int lenn;
+
+	if (str == NULL)
+		return (0);
 
 	i = 0;
 	lenn = 0;
