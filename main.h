@@ -49,4 +49,5 @@ int get_sign(char *str, int start);
 
 void not_builtin_for_path(char **arr, char **envp __attribute__((unused)));
 void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)));
+void free_ctrlc(char *buffer);
 #endif /*MAIN_H*/

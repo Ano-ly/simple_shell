@@ -34,14 +34,17 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 		_putchar('$');
 		_putchar(' ');
 		get_value = getline(&buffer, &size, stdin);
+		signal(SIGINT, free_ctrlc(buffer));
 		if (get_value == -1)
 		{
-			/*free(buffer);*/
+			free(buffer);
+			buffer = NULL;
 			break;
 		}
 		if (buffer[0] == '\0' || buffer[0] == '\n')
 		{
-			/*free(buffer);*/
+			free(buffer);
+			buffer = NULL;
 			continue;
 		}
 		buffer = strtok(buffer, "\n");
@@ -174,4 +177,15 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 		free(comm_path);
 		free(new_array);
 	}
+}
+
+/**
+ * free_ctrlc - frees buffer when Ctrlc pressed
+ * Description - runs when SIGINT signal is received by program
+ * Return: void
+*/
+
+void free_ctrlc(char *buffer)
+{
+	free(buffer);
 }
