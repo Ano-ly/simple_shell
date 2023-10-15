@@ -44,7 +44,7 @@ char **split_string(char *str)
 		free(str_dup);
 		return (NULL);
 	}
-	word = strtok(str_dup, " ");
+	word = strtok(str, " ");
 	for (i = 0; i < count; i++)
 	{
 		array[i] = word;

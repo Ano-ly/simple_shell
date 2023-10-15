@@ -24,10 +24,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 	char **arr;
 
 	int i = 0;
-	buffer = NULL;
 	size = 0;
-	arr = NULL;
-	get_value = 0;
 
 	while (i < 5)
 	{
