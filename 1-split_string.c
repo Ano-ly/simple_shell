@@ -43,7 +43,7 @@ char **split_string(char *str)
 	array = malloc((count * sizeof(char *)) + 1);
 	if (array == NULL)
 	{
-		free(str_dup);
+		/*free(str_dup);*/
 		return (NULL);
 	}
 	word = strtok(str, " ");
@@ -53,7 +53,7 @@ char **split_string(char *str)
 		word = strtok(NULL, " ");
 	}
 	array[count] = (char *)NULL;
-	free(str_dup);
+	/*free(str_dup);*/
 	return (array);
 }
 

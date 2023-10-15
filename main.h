@@ -37,9 +37,9 @@ void exec_chdir(char *comm, char **arr, char *dir);
 char *create_command_path(char *comm, char *dir);
 char **create_new_array(char *comm_path, char **arr);
 
-void is_exit_is_env(char **arr, char **envp);
+int is_exit_is_env(char **arr, char **envp);
 void built_env(char **env_t);
-void exit_shell(char **arr);
+int exit_shell(char **arr);
 
 int _atoi(char *s);
 int get_int(char c);

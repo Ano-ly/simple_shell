@@ -22,6 +22,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 	int get_value;
 	size_t size;
 	char **arr;
+	int ieie;
 
 	int i = 0;
 	size = 0;
@@ -34,18 +35,39 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 		get_value = getline(&buffer, &size, stdin);
 		if (get_value == -1)
 		{
+			/*free(buffer);*/
 			break;
 		}
 		if (buffer[0] == '\0' || buffer[0] == '\n')
+		{
+			/*free(buffer);*/
 			continue;
-		printf("Buffer: %so", buffer);
+		}
 		buffer = strtok(buffer, "\n");
-		printf("Buffer: %so", buffer);
-
 		arr = split_string(buffer);
-		is_exit_is_env(arr, envp);
+		if (arr == NULL)
+		{
+			perror("Failed to allocate memory");
+			continue;
+		}
+		ieie = is_exit_is_env(arr, envp);
+		if (ieie == -1)
+			perror("Error occured");
+		else if (ieie == 1)
+			break;
+		/**
+		 * if (buffer != NULL)
+		 *	free(buffer);
+		 * if (arr[0] != NULL)
+		 *	free(arr[0]);
+		 * if (arr != NULL)
+		 *	free(arr);
+		 */
 		i++;
 	}
+	/*free(buffer);*/
+	/*free(arr[0]);*/
+	/*free(arr);*/
 	return (0);
 }
 
@@ -68,18 +90,21 @@ void not_builtin_for_path(char **arr, char **envp)
 
 	comm_type = is_path_is_exist(arr[0]);
 	if (comm_type == -1)
+	{
 		perror("Cannot find file");
+	}
 	else if (comm_type == 1)
 	{
 		child_pid = fork();
 		if (child_pid == 0)
 		{
 			execute(arr[0], arr);
+			/*free(arr);*/
 		}
 		else
 		{
 			wait(&status);
-			free(arr);
+			/*free(arr);*/
 		}
 	}
 	else if (comm_type == 0)
@@ -125,6 +150,8 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 		else
 		{
 			wait(&status2);
+			/*free(new_array);*/
+			/*free(comm_path);*/
 		}
 	}
 }

@@ -93,7 +93,7 @@ struct find_info find_command(char *command)
 		}
 		dir = strtok(NULL, ":");
 	}
-	free(path2);
+	/*free(path2);*/
 	return (fi);
 }
 
@@ -127,6 +127,7 @@ int find_file_in_dir(char *dir, char *file_name)
 		}
 		file = readdir(dirp);
 	}
+	closedir(dirp);
 	return (0);
 }
 
