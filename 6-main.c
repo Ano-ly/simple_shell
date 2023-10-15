@@ -23,6 +23,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 	size_t size;
 	char **arr;
 	int ieie;
+	int j;
 
 	int i = 0;
 	size = 0;
@@ -54,16 +55,26 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 		if (ieie == -1)
 			perror("Error occured");
 		else if (ieie == 1)
+		{
+			j = 0;
+			while (arr[j] != NULL)
+			{
+				free(arr[j]);
+				j++;
+			}
 			break;
-		/**
-		 * if (buffer != NULL)
-		 *	free(buffer);
-		 * if (arr[0] != NULL)
-		 *	free(arr[0]);
-		 * if (arr != NULL)
-		 *	free(arr);
-		 */
+		}
+		j = 0;
+		while (arr[j] != NULL)
+		{
+			free(arr[j]);
+			j++;
+		}
+		free(arr);
+		buffer = NULL;
+		arr = NULL;
 		i++;
+		printf("i_value: %d\n", i);
 	}
 	/*free(buffer);*/
 	/*free(arr[0]);*/
@@ -142,16 +153,22 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 		new_array = create_new_array(comm_path, arr);
 		if (new_array == NULL)
 			perror("Problem occurred");
-		child_pid2 = fork();
-		if (child_pid2 == 0)
+		else if (comm_path != NULL && new_array != NULL)
 		{
-			execute(new_array[0], new_array);
+			child_pid2 = fork();
+			if (child_pid2 == 0)
+			{
+				execute(new_array[0], new_array);
+			}
+			else
+			{
+				wait(&status2);
+				free(comm_path);
+				free(new_array);
+				return;
+			}
 		}
-		else
-		{
-			wait(&status2);
-			/*free(new_array);*/
-			/*free(comm_path);*/
-		}
+		free(comm_path);
+		free(new_array);
 	}
 }
