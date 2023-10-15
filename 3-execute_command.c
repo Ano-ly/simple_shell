@@ -78,7 +78,7 @@ char *create_command_path(char *comm, char *dir)
 	{
 		comm_path[i] = dir[i];
 	}
-	free(dir);
+	/*free(dir);*/
 	_i = i;
 	comm_path[_i] = '/';
 	_i++;

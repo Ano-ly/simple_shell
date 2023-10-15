@@ -123,17 +123,22 @@ int find_file_in_dir(char *dir, char *file_name)
 	if (dirp == NULL)
 		perror("Could not access directory");
 	file = readdir(dirp);
+	if (file == NULL)
+		perror("Could not read from directory");
 	while (file != NULL)
 	{
 		if (_strcmp(file->d_name, file_name) == 0)
 		{
 			printf("   File: %s\n", file->d_name);
 			printf("File found!\n\n");
+			closedir(dirp);
 			return (1);
 		}
 		file = readdir(dirp);
 	}
 	closedir(dirp);
+
+	/*free(dirp);*/
 	return (0);
 }
 

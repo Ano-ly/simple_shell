@@ -62,6 +62,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 				free(arr[j]);
 				j++;
 			}
+			free(arr);
 			break;
 		}
 		j = 0;
@@ -163,11 +164,13 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 			else
 			{
 				wait(&status2);
+				free(is_found.dir_loc);
 				free(comm_path);
 				free(new_array);
 				return;
 			}
 		}
+		free(is_found.dir_loc);
 		free(comm_path);
 		free(new_array);
 	}

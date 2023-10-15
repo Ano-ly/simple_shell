@@ -40,6 +40,7 @@ char **split_string(char *str)
 		count++;
 		word = strtok(NULL, " ");
 	}
+	free(str_dup);
 	array = malloc((count * sizeof(char *)) + 1);
 	if (array == NULL)
 	{
@@ -53,7 +54,6 @@ char **split_string(char *str)
 		word = strtok(NULL, " ");
 	}
 	array[count] = (char *)NULL;
-	/*free(str_dup);*/
 	return (array);
 }
 
