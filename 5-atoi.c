@@ -66,7 +66,8 @@ int get_start(char *str)
  * get_sign - gets the sign of integer in string
  * @str: string in which an integer is found
  * @start: the index of the first digit in the string
- * Description - uses for loops and if, else statements to compute sign
+ * Description - Leverages for loops and conditional
+ * if-else statements to calculate the sign.
  * Return: 0 if positive, 1 if negative
 */
 

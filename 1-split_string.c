@@ -60,7 +60,7 @@ char **split_string(char *str)
 /**
  * _strlen - computes the length of a string
  * @str: string whose length is to be computed
- * Description - computes length of string
+ * Description - computes the length of a string 
  * Return: integer, length of string
 */
 

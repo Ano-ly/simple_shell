@@ -89,7 +89,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
  * @arr: array of arguments at command line
  * @envp: environment. Not used in the body of function, just
  * to be passed to next function.
- * Description - Handles commands like /bin/ls
+ * Description - Manages instructions of the form /bin/ls
  * Return: void
 */
 

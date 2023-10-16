@@ -8,9 +8,9 @@
  * normal command that has to be searched for in the directories
  * specified by PATH.
  * @comm: command inserted at terminal/command line
- * Description - Checks if argument is a path, or normal shell
- * command. If it is a path, it checks for the existence of the file
- * in question.
+ * Description - Examines whether the input is a file path
+ * or a regular shell command and verifies the presence of the
+ * file if it is indeed a path
  * Return: 0 if it is a normal command, 1 if it is a path, and -1
  * if it is a path and file does not exist
 */
