@@ -61,15 +61,17 @@ struct find_info find_command(char *command)
 {
 	char *path = getenv("PATH");
 	int path_length = _strlen(path);
-	char *path2 = malloc(path_length + 1);
 
 	int found_state;
 	char *dir;
 	char *_dir;
 	find_info fi;
+	char *path2;
 
 	fi.find_status = 0;
 	fi.dir_loc = NULL;
+
+	path2 = malloc(path_length + 1);
 
 	if (path2 == NULL)
 	{
@@ -86,20 +88,25 @@ struct find_info find_command(char *command)
 		found_state = find_file_in_dir(dir, command);
 		if (found_state == 1)
 		{
-			printf("Sizze of dir: %ld", sizeof(dir));
 			_dir = malloc(sizeof(dir) + 1);
 			if (_dir == NULL)
+			{
+				free(path2);
+				path2 = NULL;
 				return (fi);
+			}
 			_memcpy(_dir, dir, _strlen(dir));
 			_dir[_strlen(dir)] = '\0';
 			fi.find_status = 1;
 			fi.dir_loc = _dir;
 			free(path2);
+			path2 = NULL;
 			return (fi);
 		}
 		dir = strtok(NULL, ":");
 	}
 	free(path2);
+	path2 = NULL;
 	return (fi);
 }
 
@@ -117,7 +124,6 @@ int find_file_in_dir(char *dir, char *file_name)
 	DIR *dirp;
 	struct dirent *file;
 
-	printf("File name: %s\n", file_name);
 
 	dirp = opendir(dir);
 	if (dirp == NULL)
@@ -129,8 +135,6 @@ int find_file_in_dir(char *dir, char *file_name)
 	{
 		if (_strcmp(file->d_name, file_name) == 0)
 		{
-			printf("   File: %s\n", file->d_name);
-			printf("File found!\n\n");
 			closedir(dirp);
 			return (1);
 		}
@@ -138,7 +142,6 @@ int find_file_in_dir(char *dir, char *file_name)
 	}
 	closedir(dirp);
 
-	/*free(dirp);*/
 	return (0);
 }
 

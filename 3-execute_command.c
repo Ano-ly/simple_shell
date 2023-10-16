@@ -19,8 +19,8 @@ void execute(char *comm_path, char **arr)
 
 	exec_value = execve(comm_path, arr, environ);
 	if (exec_value == -1)
-		exit(98);
-	exit(0);
+		perror("I");
+	_exit(0);
 }
 
 /**
@@ -78,7 +78,6 @@ char *create_command_path(char *comm, char *dir)
 	{
 		comm_path[i] = dir[i];
 	}
-	/*free(dir);*/
 	_i = i;
 	comm_path[_i] = '/';
 	_i++;
@@ -117,7 +116,7 @@ char **create_new_array(char *comm_path, char **arr)
 		count++;
 		i++;
 	}
-	new_arr = malloc(count + 1);
+	new_arr = malloc((count + 1) * sizeof(char *));
 	if (new_arr == NULL)
 		return (NULL);
 	new_arr[0] = comm_path;
@@ -129,7 +128,7 @@ char **create_new_array(char *comm_path, char **arr)
 		i++;
 	}
 	new_arr[i] = NULL;
-	/*free(arr);*/
+	/*free(arr);---*/
 	return (new_arr);
 }
 

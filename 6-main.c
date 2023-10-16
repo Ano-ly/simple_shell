@@ -23,7 +23,6 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 	size_t size;
 	char **arr;
 	int ieie;
-	int j;
 
 	int i = 0;
 	size = 0;
@@ -34,17 +33,21 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 		_putchar('$');
 		_putchar(' ');
 		get_value = getline(&buffer, &size, stdin);
+		signal(SIGINT, &free_ctrlc);
 		if (get_value == -1)
 		{
-			/*free(buffer);*/
+			free(buffer);
+			buffer = NULL;
 			break;
 		}
 		if (buffer[0] == '\0' || buffer[0] == '\n')
 		{
-			/*free(buffer);*/
+			free(buffer);
+			buffer = NULL;
 			continue;
 		}
-		buffer = strtok(buffer, "\n");
+		if (buffer[get_value - 1] == '\n')
+			buffer[get_value - 1] = '\0';
 		arr = split_string(buffer);
 		if (arr == NULL)
 		{
@@ -56,30 +59,22 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 			perror("Error occured");
 		else if (ieie == 1)
 		{
-			j = 0;
-			while (arr[j] != NULL)
-			{
-				free(arr[j]);
-				j++;
-			}
 			free(arr);
+			free(buffer);
+			buffer = NULL;
+			arr = NULL;
 			break;
 		}
-		j = 0;
-		while (arr[j] != NULL)
-		{
-			free(arr[j]);
-			j++;
-		}
+		printf("BUffer index o: %d", buffer[0]);
+		if (arr[1] == NULL || buffer[0] != 32)
+			free(arr[0]);
 		free(arr);
+		/*if (buffer != NULL)*/
+			/*free(buffer);*/
 		buffer = NULL;
 		arr = NULL;
 		i++;
-		printf("i_value: %d\n", i);
 	}
-	/*free(buffer);*/
-	/*free(arr[0]);*/
-	/*free(arr);*/
 	return (0);
 }
 
@@ -111,12 +106,10 @@ void not_builtin_for_path(char **arr, char **envp)
 		if (child_pid == 0)
 		{
 			execute(arr[0], arr);
-			/*free(arr);*/
 		}
 		else
 		{
 			wait(&status);
-			/*free(arr);*/
 		}
 	}
 	else if (comm_type == 0)
@@ -143,6 +136,7 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 	int status2;
 
 	is_found = find_command(arr[0]);
+	printf("ARR[0]: |%s|\n", arr[0]);
 
 	if (is_found.find_status == 0)
 		perror("Command not found");
@@ -167,11 +161,30 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 				free(is_found.dir_loc);
 				free(comm_path);
 				free(new_array);
+				is_found.dir_loc = NULL;
+				comm_path = NULL;
+				new_array = NULL;
 				return;
 			}
 		}
 		free(is_found.dir_loc);
 		free(comm_path);
 		free(new_array);
+		is_found.dir_loc = NULL;
+		comm_path = NULL;
+		new_array = NULL;
 	}
+}
+
+/**
+ * free_ctrlc - frees buffer when Ctrlc pressed
+ * Description - runs when SIGINT signal is received by program
+ * Return: void
+*/
+
+void free_ctrlc()
+{
+	int a;
+	a = 4 + 4;
+	a += 7;
 }

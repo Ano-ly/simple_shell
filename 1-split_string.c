@@ -33,26 +33,29 @@ char **split_string(char *str)
 	str_dup = malloc(len + 1);
 	if (str_dup == NULL)
 		return (NULL);
-	_memcpy(str_dup, str, len + 1);
+	memcpy(str_dup, str, len);
+	str_dup[len] = '\0';
 	word = strtok(str_dup, " ");
 	while (word != NULL)
 	{
 		count++;
 		word = strtok(NULL, " ");
 	}
+	printf("Cuont: %d", count);
 	free(str_dup);
-	array = malloc((count * sizeof(char *)) + 1);
+	array = malloc(((count + 1) * sizeof(char *)));
 	if (array == NULL)
 	{
-		/*free(str_dup);*/
 		return (NULL);
 	}
 	word = strtok(str, " ");
 	for (i = 0; i < count; i++)
 	{
+		printf("Word: %s", word);
 		array[i] = word;
 		word = strtok(NULL, " ");
 	}
+	printf("Count: %d", count);
 	array[count] = (char *)NULL;
 	return (array);
 }
