@@ -99,6 +99,7 @@ int exit_shell(char **arr)
 			if (!(status[i] >= 48 && status[i] <= 57))
 			{
 				perror("Invalid argument");
+				return(-1);
 			}
 			i++;
 		}

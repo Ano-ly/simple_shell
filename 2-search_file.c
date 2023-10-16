@@ -61,15 +61,17 @@ struct find_info find_command(char *command)
 {
 	char *path = getenv("PATH");
 	int path_length = _strlen(path);
-	char *path2 = malloc(path_length + 1);
 
 	int found_state;
 	char *dir;
 	char *_dir;
 	find_info fi;
+	char *path2;
 
 	fi.find_status = 0;
 	fi.dir_loc = NULL;
+
+	path2 = malloc(path_length + 1);
 
 	if (path2 == NULL)
 	{
@@ -88,7 +90,11 @@ struct find_info find_command(char *command)
 		{
 			_dir = malloc(sizeof(dir) + 1);
 			if (_dir == NULL)
+			{
+				free(path2);
+				path2 = NULL;
 				return (fi);
+			}
 			_memcpy(_dir, dir, _strlen(dir));
 			_dir[_strlen(dir)] = '\0';
 			fi.find_status = 1;

@@ -23,7 +23,6 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 	size_t size;
 	char **arr;
 	int ieie;
-	int j;
 
 	int i = 0;
 	size = 0;
@@ -60,25 +59,15 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 			perror("Error occured");
 		else if (ieie == 1)
 		{
-			j = 0;
-			while (arr[j] != NULL)
-			{
-				free(arr[j]);
-				arr[j] = NULL;
-				j++;
-			}
 			free(arr);
-			/*if (buffer != NULL)*/
-				/*free(buffer);*/
+			free(buffer);
+			buffer = NULL;
+			arr = NULL;
 			break;
 		}
-		j = 0;
-		while (arr[j] != NULL)
-		{
-			free(arr[j]);
-			arr[j] = NULL;
-			j++;
-		}
+		printf("BUffer index o: %d", buffer[0]);
+		if (arr[1] == NULL || buffer[0] != 32)
+			free(arr[0]);
 		free(arr);
 		/*if (buffer != NULL)*/
 			/*free(buffer);*/
@@ -147,6 +136,7 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 	int status2;
 
 	is_found = find_command(arr[0]);
+	printf("ARR[0]: |%s|\n", arr[0]);
 
 	if (is_found.find_status == 0)
 		perror("Command not found");

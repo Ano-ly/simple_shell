@@ -19,7 +19,7 @@ void execute(char *comm_path, char **arr)
 
 	exec_value = execve(comm_path, arr, environ);
 	if (exec_value == -1)
-		_exit(98);
+		perror("I");
 	_exit(0);
 }
 
