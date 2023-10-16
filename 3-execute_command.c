@@ -30,7 +30,8 @@ void execute(char *comm_path, char **arr)
  * @arr: array of arguments to the command, including the command itself as the
  * first argument
  * @dir: directory to be changed to
- * Description - is used to execute commands that are not paths.
+ * Description - Is employed to run commands that are not specified as 
+ * file paths.
  * Return: void
 */
 
