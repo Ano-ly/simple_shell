@@ -6,7 +6,9 @@
  * @envp: environment passed down by main function
  * Description - comes immediately after split_string function.
  * called by the main function
- * Return: 0 if successful, -1 if not, 1 if program to exit.
+ * Return: -1 if either built-ins not successful, positive number
+ * if program to exit, -2 if env command executed successfully,
+ * -3 if command is not a built-in.
 */
 
 int is_exit_is_env(char **arr, char **envp)
@@ -16,27 +18,28 @@ int is_exit_is_env(char **arr, char **envp)
 	if (_strcmp(arr[0], "exit") == 0)
 	{
 		exit_value = exit_shell(arr);
-		if (exit_value == 0)
-			return (1);
+		if (exit_value == -1)
+			perror("False status");
+		return (exit_value);
 	}
 	else if (_strcmp(arr[0], "env") == 0)
 	{
 		if (arr[1] == NULL)
 		{
 			built_env(envp);
-			return (0);
+			return (-2);
 		}
 		else
 		{
-			return (-1);
 			perror("Usage: env");
+			return (-1);
 		}
 	}
 	else
 	{
 		not_builtin_for_path(arr, envp);
 	}
-	return (0);
+	return (-3);
 }
 
 /**
@@ -72,7 +75,8 @@ void built_env(char **env_t)
  * exit_shell - exits the shell
  * @arr: array of arguments
  * Definition - exits shell and includes code for exit status.
- * Return: integer; 0 if program to be exited, 1,if not
+ * Return: positive number if program to be exited, -1, if not.
+ * returns the exit status number.
 */
 
 int exit_shell(char **arr)
@@ -104,14 +108,11 @@ int exit_shell(char **arr)
 			i++;
 		}
 		stat = _atoi(status);
-		/*free(arr);---*/
-		return (0);
-		exit(stat);
+		return (stat);
 	}
 	else if (count == 1)
 	{
 		return(0);
-		exit(0);
 	}
 	return (1);
 }

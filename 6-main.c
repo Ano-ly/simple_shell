@@ -51,19 +51,16 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 		arr = split_string(buffer);
 		if (arr == NULL)
 		{
-			perror("Failed to allocate memory");
 			continue;
 		}
 		ieie = is_exit_is_env(arr, envp);
-		if (ieie == -1)
-			perror("Error occured");
-		else if (ieie == 1)
+		if (ieie >= 0)
 		{
 			free(arr);
 			free(buffer);
 			buffer = NULL;
 			arr = NULL;
-			break;
+			exit(ieie);
 		}
 		printf("BUffer index o: %d", buffer[0]);
 		if (arr[1] == NULL || buffer[0] != 32)
