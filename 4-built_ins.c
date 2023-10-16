@@ -15,7 +15,6 @@ int is_exit_is_env(char **arr, char **envp)
 
 	if (_strcmp(arr[0], "exit") == 0)
 	{
-		printf("About to exit shell...");
 		exit_value = exit_shell(arr);
 		if (exit_value == 0)
 			return (1);

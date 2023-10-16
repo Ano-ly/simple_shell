@@ -86,7 +86,6 @@ struct find_info find_command(char *command)
 		found_state = find_file_in_dir(dir, command);
 		if (found_state == 1)
 		{
-			printf("Sizze of dir: %ld", sizeof(dir));
 			_dir = malloc(sizeof(dir) + 1);
 			if (_dir == NULL)
 				return (fi);
@@ -117,7 +116,6 @@ int find_file_in_dir(char *dir, char *file_name)
 	DIR *dirp;
 	struct dirent *file;
 
-	printf("File name: %s\n", file_name);
 
 	dirp = opendir(dir);
 	if (dirp == NULL)
@@ -129,8 +127,6 @@ int find_file_in_dir(char *dir, char *file_name)
 	{
 		if (_strcmp(file->d_name, file_name) == 0)
 		{
-			printf("   File: %s\n", file->d_name);
-			printf("File found!\n\n");
 			closedir(dirp);
 			return (1);
 		}

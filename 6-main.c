@@ -34,7 +34,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 		_putchar('$');
 		_putchar(' ');
 		get_value = getline(&buffer, &size, stdin);
-		signal(SIGINT, free_ctrlc(buffer));
+		signal(SIGINT, &free_ctrlc);
 		if (get_value == -1)
 		{
 			free(buffer);
@@ -78,7 +78,6 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 		buffer = NULL;
 		arr = NULL;
 		i++;
-		printf("i_value: %d\n", i);
 	}
 	/*free(buffer);*/
 	/*free(arr[0]);*/
@@ -185,7 +184,9 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
  * Return: void
 */
 
-void free_ctrlc(char *buffer)
+void free_ctrlc()
 {
-	free(buffer);
+	int a;
+	a = 4 + 4;
+	a += 7;
 }
