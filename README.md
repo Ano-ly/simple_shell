@@ -1,5 +1,4 @@
-This is the Simple Shell Project. It is a custom made shell that takes commands
-from the user and executes them.
+This project is the Simple Shell, a customized command-line interpreter that accepts user input and carries out the specified commands.
 
 steps undergone below
 
