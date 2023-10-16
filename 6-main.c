@@ -47,7 +47,8 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 			buffer = NULL;
 			continue;
 		}
-		buffer = strtok(buffer, "\n");
+		if (buffer[get_value - 1] == '\n')
+			buffer[get_value - 1] = '\0';
 		arr = split_string(buffer);
 		if (arr == NULL)
 		{
@@ -63,25 +64,28 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 			while (arr[j] != NULL)
 			{
 				free(arr[j]);
+				arr[j] = NULL;
 				j++;
 			}
 			free(arr);
+			/*if (buffer != NULL)*/
+				/*free(buffer);*/
 			break;
 		}
 		j = 0;
 		while (arr[j] != NULL)
 		{
 			free(arr[j]);
+			arr[j] = NULL;
 			j++;
 		}
 		free(arr);
+		/*if (buffer != NULL)*/
+			/*free(buffer);*/
 		buffer = NULL;
 		arr = NULL;
 		i++;
 	}
-	/*free(buffer);*/
-	/*free(arr[0]);*/
-	/*free(arr);*/
 	return (0);
 }
 
@@ -113,12 +117,10 @@ void not_builtin_for_path(char **arr, char **envp)
 		if (child_pid == 0)
 		{
 			execute(arr[0], arr);
-			/*free(arr);*/
 		}
 		else
 		{
 			wait(&status);
-			/*free(arr);*/
 		}
 	}
 	else if (comm_type == 0)
@@ -169,12 +171,18 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 				free(is_found.dir_loc);
 				free(comm_path);
 				free(new_array);
+				is_found.dir_loc = NULL;
+				comm_path = NULL;
+				new_array = NULL;
 				return;
 			}
 		}
 		free(is_found.dir_loc);
 		free(comm_path);
 		free(new_array);
+		is_found.dir_loc = NULL;
+		comm_path = NULL;
+		new_array = NULL;
 	}
 }
 

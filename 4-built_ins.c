@@ -103,13 +103,12 @@ int exit_shell(char **arr)
 			i++;
 		}
 		stat = _atoi(status);
-		/*free(arr);*/
+		/*free(arr);---*/
 		return (0);
 		exit(stat);
 	}
 	else if (count == 1)
 	{
-		/*free(arr);*/
 		return(0);
 		exit(0);
 	}

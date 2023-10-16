@@ -94,11 +94,13 @@ struct find_info find_command(char *command)
 			fi.find_status = 1;
 			fi.dir_loc = _dir;
 			free(path2);
+			path2 = NULL;
 			return (fi);
 		}
 		dir = strtok(NULL, ":");
 	}
 	free(path2);
+	path2 = NULL;
 	return (fi);
 }
 
@@ -134,7 +136,6 @@ int find_file_in_dir(char *dir, char *file_name)
 	}
 	closedir(dirp);
 
-	/*free(dirp);*/
 	return (0);
 }
 
