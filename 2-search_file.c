@@ -41,7 +41,7 @@ int is_path_is_exist(char *comm, char *argvo, int ii)
 		exists = stat(comm, &_status);
 		if (exists == 0)
 			return (1);
-		else
+		if (exists != 0)
 		{
 			perror_command_not_found(argvo, ii, comm, "not found");
 			return (-1);
@@ -64,19 +64,16 @@ int is_path_is_exist(char *comm, char *argvo, int ii)
 
 struct find_info find_command(char *command)
 {
-	char *path = getenv("PATH");
-	int path_length = _strlen(path);
-
 	int found_state;
 	char *dir;
 	char *_dir;
 	find_info fi;
-	char *path2;
+	char *path = getenv("PATH");
+	int path_length = _strlen(path);
+	char *path2 = malloc(path_length + 1);
 
 	fi.find_status = 0;
 	fi.dir_loc = NULL;
-
-	path2 = malloc(path_length + 1);
 
 	if (path2 == NULL)
 	{
@@ -86,8 +83,6 @@ struct find_info find_command(char *command)
 	_memcpy(path2, path, path_length);
 	path2[path_length] = '\0';
 	dir = strtok(path2, ":");
-	if (dir == NULL)
-		dir = path2;
 	while (dir != NULL)
 	{
 		found_state = find_file_in_dir(dir, command);

@@ -20,7 +20,6 @@ void execute(char *comm_path, char **arr)
 	exec_value = execve(comm_path, arr, environ);
 	if (exec_value == -1)
 	{
-		printf("It is mius 1");
 		perror("Could not execute:");
 	}
 	/*_exit(0);*/
@@ -33,7 +32,7 @@ void execute(char *comm_path, char **arr)
  * @arr: array of arguments to the command, including the command itself as the
  * first argument
  * @dir: directory to be changed to
- * Description - Is employed to run commands that are not specified as 
+ * Description - Is employed to run commands that are not specified as
  * file paths.
  * Return: void
 */

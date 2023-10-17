@@ -41,7 +41,6 @@ char **split_string(char *str)
 		count++;
 		word = strtok(NULL, " ");
 	}
-	/*printf("Cuont: %d", count);*/
 	free(str_dup);
 	array = malloc(((count + 1) * sizeof(char *)));
 	if (array == NULL)
@@ -51,11 +50,9 @@ char **split_string(char *str)
 	word = strtok(str, " ");
 	for (i = 0; i < count; i++)
 	{
-		/*printf("Word: %s", word);*/
 		array[i] = word;
 		word = strtok(NULL, " ");
 	}
-	/*printf("Count: %d", count);*/
 	array[count] = (char *)NULL;
 	return (array);
 }
@@ -63,7 +60,7 @@ char **split_string(char *str)
 /**
  * _strlen - computes the length of a string
  * @str: string whose length is to be computed
- * Description - computes the length of a string 
+ * Description - computes the length of a string
  * Return: integer, length of string
 */
 

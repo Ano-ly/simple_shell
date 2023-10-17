@@ -19,7 +19,7 @@ int perror_command_not_found(char *argvo, int ii, char *comm, char *msg)
 	int arglen;
 	int commlen;
 	int msglen;
-	int return_value;
+	int ret_value;
 	char *semicolon;
 
 	arglen = _strlen(argvo);
@@ -27,22 +27,22 @@ int perror_command_not_found(char *argvo, int ii, char *comm, char *msg)
 	msglen = _strlen(msg);
 	semicolon = ": ";
 
-	return_value = write(STDERR_FILENO, argvo, arglen);
-	if (return_value == -1)
+	ret_value = write(STDERR_FILENO, argvo, arglen);
+	if (ret_value == -1)
 		return (-1);
-	return_value = write(STDERR_FILENO, semicolon, 2);
-	return_value = _malloc_ii(ii);
-	if (return_value == -1)
+	ret_value = write(STDERR_FILENO, semicolon, 2);
+	ret_value = _malloc_ii(ii);
+	if (ret_value == -1)
 		return (-1);
-	return_value = write(STDERR_FILENO, semicolon, 2);
-	return_value = write(STDERR_FILENO, comm, commlen);
-	if (return_value == -1)
+	ret_value = write(STDERR_FILENO, semicolon, 2);
+	ret_value = write(STDERR_FILENO, comm, commlen);
+	if (ret_value == -1)
 		return (-1);
-	return_value = write(STDERR_FILENO, semicolon, 2);
-	return_value = write(STDERR_FILENO, msg, msglen);
-	if (return_value == -1)
+	ret_value = write(STDERR_FILENO, semicolon, 2);
+	ret_value = write(STDERR_FILENO, msg, msglen);
+	if (ret_value == -1)
 		return (-1);
-	return_value = write(STDERR_FILENO, "\n", 1);
+	ret_value = write(STDERR_FILENO, "\n", 1);
 	return (0);
 
 }

@@ -47,11 +47,39 @@ int get_start(char *str);
 int get_end(char *str, int start);
 int get_sign(char *str, int start);
 
+/**
+ * not_builtin_for_path - handles non-built-in commands, for
+ * commands whose paths are specified
+ * @arr: array of arguments at command line
+ * @envp: environment. Not used in the body of function, just
+ * @argvo: argv[0] of main function;
+ * @ii: int count of main while loop repetitions.
+ * to be passed to next function.
+ * Description - Manages instructions of the form /bin/ls
+ * Return: void
+*/
+
 void not_builtin_for_path(char **arr, char **envp __attribute__((unused)),
 char *argvo, int ii);
+
+/**
+ * not_builtin_for_non_path - handles non-built-in commands, for
+ * commands whose paths are not specified
+ * @arr: array of arguments at command line
+ * @envp: environment. Not used in the body of function, just
+ * @argvo: argv[0] of main function;
+ * @ii: int count of main while loop repetitions.
+ *
+ * to be passed to next function.
+ * Description - Handles commands like ls
+ * Return: void
+*/
+
 void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)),
 char *argvo, int ii);
-void free_ctrlc();
+void free_ctrlc(void);
+int noninteractive_main(char *buffer, char **envp, char *argvo,
+int ii);
 
 
 int perror_command_not_found(char *argvo, int ii, char *comm, char *msg);
@@ -59,4 +87,9 @@ int _putchar_err(char c);
 int _malloc_ii(int num);
 int fill_buffer(char *buffer, long int num, int n, int base);
 int print_rev_buffer(char *buffer, int n);
+
+
+void print_prompt(void);
+void exit_ieie(int ieie, char **arr, char *buffer);
+void not_path_frees(char *comm_path, char **new_array, char *dir_loc);
 #endif /*MAIN_H*/
