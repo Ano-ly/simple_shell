@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include "main.h"
-
+#include <stdio.h>
 
 /**
  * execute - does the actual execution of the command written in the
@@ -19,8 +19,11 @@ void execute(char *comm_path, char **arr)
 
 	exec_value = execve(comm_path, arr, environ);
 	if (exec_value == -1)
-		perror("I");
-	_exit(0);
+	{
+		printf("It is mius 1");
+		perror("Could not execute:");
+	}
+	/*_exit(0);*/
 }
 
 /**

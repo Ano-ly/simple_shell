@@ -15,8 +15,8 @@
  * Return: Always zero
 */
 
-int main(int ac __attribute__((unused)), char **av __attribute__((unused))
-, char **envp)
+int main(int ac __attribute__((unused)), char **av,
+ char **envp)
 {
 	char *buffer;
 	int get_value;
@@ -102,6 +102,7 @@ void not_builtin_for_path(char **arr, char **envp, char *argvo, int ii)
 		child_pid = fork();
 		if (child_pid == 0)
 		{
+			printf("About to execute");
 			execute(arr[0], arr);
 		}
 		else
@@ -152,6 +153,7 @@ char *argvo, int ii)
 			child_pid2 = fork();
 			if (child_pid2 == 0)
 			{
+				printf("About to execute");
 				execute(new_array[0], new_array);
 			}
 			else
