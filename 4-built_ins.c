@@ -6,8 +6,8 @@
  * @envp: environment passed down by main function
  * @argvo: argv[0] of main function;
  * @ii: int count of main while loop repetitions.
- * Description - comes immediately after split_string function.
- * called by the main function
+ * Description - Immediately follows the split_string function
+ * and is invoked by the main function.
  * Return: -1 if either built-ins not successful, positive number
  * if program to exit, -2 if env command executed successfully,
  * -3 if command is not a built-in.

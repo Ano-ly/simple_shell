@@ -84,7 +84,7 @@ int main(int ac __attribute__((unused)), char **av,
  * @argvo: argv[0] of main function;
  * @ii: int count of main while loop repetitions.
  * to be passed to next function.
- * Description - Handles commands like /bin/ls
+ * Description - Manages instructions of the form /bin/ls
  * Return: void
 */
 
