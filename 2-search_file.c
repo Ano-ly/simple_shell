@@ -8,6 +8,8 @@
  * normal command that has to be searched for in the directories
  * specified by PATH.
  * @comm: command inserted at terminal/command line
+ * @argvo: argv[0] of main function;
+ * @ii: int count of main while loop repetitions.
  * Description - Checks if argument is a path, or normal shell
  * command. If it is a path, it checks for the existence of the file
  * in question.
@@ -15,7 +17,7 @@
  * if it is a path and file does not exist
 */
 
-int is_path_is_exist(char *comm)
+int is_path_is_exist(char *comm, char *argvo, int ii)
 {
 	int exists;
 	int i;
@@ -40,7 +42,10 @@ int is_path_is_exist(char *comm)
 		if (exists == 0)
 			return (1);
 		else
+		{
+			perror_command_not_found(argvo, ii, comm, "not found");
 			return (-1);
+		}
 	}
 	return (0);
 }

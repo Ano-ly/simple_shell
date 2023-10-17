@@ -41,7 +41,7 @@ char **split_string(char *str)
 		count++;
 		word = strtok(NULL, " ");
 	}
-	printf("Cuont: %d", count);
+	/*printf("Cuont: %d", count);*/
 	free(str_dup);
 	array = malloc(((count + 1) * sizeof(char *)));
 	if (array == NULL)
@@ -51,11 +51,11 @@ char **split_string(char *str)
 	word = strtok(str, " ");
 	for (i = 0; i < count; i++)
 	{
-		printf("Word: %s", word);
+		/*printf("Word: %s", word);*/
 		array[i] = word;
 		word = strtok(NULL, " ");
 	}
-	printf("Count: %d", count);
+	/*printf("Count: %d", count);*/
 	array[count] = (char *)NULL;
 	return (array);
 }
@@ -95,7 +95,7 @@ int _strlen(char *str)
  */
 int _putchar(char c)
 {
-	if (write(2, &c, 1) == -1)
+	if (write(STDOUT_FILENO, &c, 1) == -1)
 	{
 		perror("write");
 		return (1);

@@ -24,10 +24,11 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 	char **arr;
 	int ieie;
 
-	int i = 0;
+	int i = 1;
 	size = 0;
 	buffer = NULL;
 
+	/*printf("ARG{}: %s", av[0]);*/
 	while (1)
 	{
 		_putchar('$');
@@ -53,7 +54,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 		{
 			continue;
 		}
-		ieie = is_exit_is_env(arr, envp);
+		ieie = is_exit_is_env(arr, envp, av[0], i);
 		if (ieie >= 0)
 		{
 			free(arr);
@@ -62,7 +63,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
 			arr = NULL;
 			exit(ieie);
 		}
-		printf("BUffer index o: %d", buffer[0]);
+		/*printf("BUffer index o: %d", buffer[0]);*/
 		if (arr[1] == NULL || buffer[0] != 32)
 			free(arr[0]);
 		free(arr);
@@ -80,24 +81,23 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused))
  * commands whose paths are specified
  * @arr: array of arguments at command line
  * @envp: environment. Not used in the body of function, just
+ * @argvo: argv[0] of main function;
+ * @ii: int count of main while loop repetitions.
  * to be passed to next function.
  * Description - Handles commands like /bin/ls
  * Return: void
 */
 
 
-void not_builtin_for_path(char **arr, char **envp)
+void not_builtin_for_path(char **arr, char **envp, char *argvo, int ii)
 {
 	int comm_type;
 	pid_t child_pid;
 	int status;
 
-	comm_type = is_path_is_exist(arr[0]);
-	if (comm_type == -1)
-	{
-		perror("Cannot find file");
-	}
-	else if (comm_type == 1)
+	comm_type = is_path_is_exist(arr[0], argvo, ii);
+
+	if (comm_type == 1)
 	{
 		child_pid = fork();
 		if (child_pid == 0)
@@ -110,7 +110,7 @@ void not_builtin_for_path(char **arr, char **envp)
 		}
 	}
 	else if (comm_type == 0)
-		not_builtin_for_non_path(arr, envp);
+		not_builtin_for_non_path(arr, envp, argvo, ii);
 }
 
 
@@ -119,12 +119,16 @@ void not_builtin_for_path(char **arr, char **envp)
  * commands whose paths are not specified
  * @arr: array of arguments at command line
  * @envp: environment. Not used in the body of function, just
+ * @argvo: argv[0] of main function;
+ * @ii: int count of main while loop repetitions.
+ *
  * to be passed to next function.
  * Description - Handles commands like ls
  * Return: void
 */
 
-void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
+void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)),
+char *argvo, int ii)
 {
 	find_info is_found;
 	char *comm_path;
@@ -133,11 +137,9 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 	int status2;
 
 	is_found = find_command(arr[0]);
-	printf("ARR[0]: |%s|\n", arr[0]);
+	/*printf("ARR[0]: |%s|\n", arr[0]);*/
 
-	if (is_found.find_status == 0)
-		perror("Command not found");
-	else
+	if (is_found.find_status != 0)
 	{
 		comm_path = create_command_path(arr[0], is_found.dir_loc);
 		if (comm_path == NULL)
@@ -171,6 +173,12 @@ void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)))
 		comm_path = NULL;
 		new_array = NULL;
 	}
+	else
+	{
+		perror_command_not_found(argvo, ii, arr[0], "not found");
+	}
+	free(is_found.dir_loc);
+	is_found.dir_loc = NULL;
 }
 
 /**
