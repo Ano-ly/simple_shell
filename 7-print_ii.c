@@ -1,15 +1,15 @@
 #include "main.h"
+/*#include <stdio.h>*/
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
-/*#include <stdio.h>*/
 
 /**
  * _malloc_ii - allocates suitable memory space for intii
  * @num: number to be printed.
  *
- * Definition - determines how many bytes of memory should be
- * allocated, and performs the memory allocation.
+ * Definition - Calculates the memory allocation size and
+ * allocates the corresponding number of bytes.
  * Return: count of printed characters
 */
 
@@ -108,7 +108,9 @@ int print_rev_buffer(char *buffer, int n)
 /**
  * _putchar_err - writes the character c to stderr
  * @c: The character to print
- *
+ * Description: defines a function for writing a character
+ * to standard error stream and provide error handling if encountered
+ * any issues
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
