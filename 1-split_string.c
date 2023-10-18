@@ -17,12 +17,12 @@
 
 char **split_string(char *str)
 {
-	char *word;
 	char *str_dup;
+	char *word;
 	char **array;
 	int i;
-	int count;
 	int len;
+	int count;
 
 	if (str == NULL)
 		return (NULL);
