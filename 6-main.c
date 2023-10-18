@@ -153,6 +153,7 @@ char *argvo, int ii)
 
 /**
  * free_ctrlc - frees buffer when Ctrlc pressed
+ * @signal: signal
  * Description - runs when SIGINT signal is received by program
  * Return: void
 */
