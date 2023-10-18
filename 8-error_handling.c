@@ -16,8 +16,8 @@
 
 int perror_command_not_found(char *argvo, int ii, char *comm, char *msg)
 {
-	int arglen;
 	int commlen;
+	int arglen;
 	int msglen;
 	int ret_value;
 	char *semicolon;
