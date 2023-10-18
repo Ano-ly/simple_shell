@@ -4,7 +4,8 @@
 /**
  * _getenv - gets the value of an environment variable
  * @var_name: name of variable being checked for
- * Definition: implementation of getenv
+ * Definition: implementations of getenv
+ * Description: The code that provides functionality similar to getenv
  * Return: pointer to variable value, NULL if variable not found
 */
 
