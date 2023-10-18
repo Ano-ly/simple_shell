@@ -35,7 +35,7 @@ char **envp)
 		{
 			free(buffer);
 			buffer = NULL;
-			break;
+			exit (0);
 		}
 		if (buffer[0] == '\0' || buffer[0] == '\n')
 		{
