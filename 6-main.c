@@ -3,8 +3,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include "main.h"
-#include "main2.h"
-#include <signal.h>
 
 /**
  * main - starting point of program.
@@ -31,7 +29,7 @@ char **envp)
 	while (1)
 	{
 		print_prompt();
-		signal(SIGINT, free_ctrlc);
+		/*signal(SIGINT, free_ctrlc);*/
 		get_value = getline(&buffer, &size, stdin);
 		if (get_value == -1)
 		{
@@ -161,9 +159,6 @@ char *argvo, int ii)
 
 void free_ctrlc(int signal __attribute__((unused)))
 {
-	if (buffer != NULL)
-		free(buffer);
-	buffer = NULL;
 	exit(0);
 }
 
