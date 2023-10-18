@@ -93,5 +93,11 @@ void print_prompt(void);
 void exit_ieie(int ieie, char **arr, char *buffer);
 void not_path_frees(char *comm_path, char **new_array, char *dir_loc);
 void find_command_replace(char *path2);
+
+
+int _strlen_env(char *str);
+int _strcmp_env(char *s1, char *s2);
+char *_getenv(char *var_name);
+int find_envar_start(char *var);
 #endif /*MAIN_H*/
 

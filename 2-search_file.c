@@ -67,7 +67,7 @@ struct find_info find_command(char *command)
 	char *dir;
 	char *_dir;
 	find_info fi;
-	char *path = getenv("PATH");
+	char *path = _getenv("PATH");
 	int path_length = _strlen(path);
 	char *path2 = malloc(path_length + 1);
 
