@@ -7,9 +7,10 @@
  * comment section of main
  * @comm_path: path to the command to be executed
  * @arr: array of arguments
- *
  * Definition - executes a command for child processes and exits 98 if
  * exec function failed.
+ * description: Executes a command for child processes and exits code
+ * in case of a failed exec function
  * Return: void
 */
 
