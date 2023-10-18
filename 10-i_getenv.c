@@ -81,8 +81,8 @@ int _strcmp_env(char *s1, char *s2)
  * _strlen_env - computes the length of a string
  * @str: string whose length is to be computed;
  * environmental variable
- * Description - computes the length of the variable
- * name of an environmental variable
+ * Description - Calculates the character count of the
+ * environmental variable's name
  * Return: integer, length of string
 */
 
