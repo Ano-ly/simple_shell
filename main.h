@@ -92,4 +92,5 @@ int print_rev_buffer(char *buffer, int n);
 void print_prompt(void);
 void exit_ieie(int ieie, char **arr, char *buffer);
 void not_path_frees(char *comm_path, char **new_array, char *dir_loc);
+void find_command_replace(char *path2);
 #endif /*MAIN_H*/

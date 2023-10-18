@@ -64,7 +64,6 @@ int is_path_is_exist(char *comm, char *argvo, int ii)
 
 struct find_info find_command(char *command)
 {
-	int found_state;
 	char *dir;
 	char *_dir;
 	find_info fi;
@@ -85,28 +84,24 @@ struct find_info find_command(char *command)
 	dir = strtok(path2, ":");
 	while (dir != NULL)
 	{
-		found_state = find_file_in_dir(dir, command);
-		if (found_state == 1)
+		if (find_file_in_dir(dir, command) == 1)
 		{
 			_dir = malloc(sizeof(dir) + 1);
 			if (_dir == NULL)
 			{
-				free(path2);
-				path2 = NULL;
+				find_command_replace(path2);
 				return (fi);
 			}
 			_memcpy(_dir, dir, _strlen(dir));
 			_dir[_strlen(dir)] = '\0';
 			fi.find_status = 1;
 			fi.dir_loc = _dir;
-			free(path2);
-			path2 = NULL;
+			find_command_replace(path2);
 			return (fi);
 		}
 		dir = strtok(NULL, ":");
 	}
-	free(path2);
-	path2 = NULL;
+	find_command_replace(path2);
 	return (fi);
 }
 

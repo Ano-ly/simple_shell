@@ -40,3 +40,16 @@ void not_path_frees(char *comm_path, char **new_array, char *dir_loc)
 	comm_path = NULL;
 	new_array = NULL;
 }
+
+/**
+ * find_command_replace - replaces two lines of code in function find_command
+ * @path2: malloc allocated replicate of PATH
+ * Definition - replaces two lines of code in function find_command
+ * Return: void
+*/
+
+void find_command_replace(char *path2)
+{
+	free(path2);
+	path2 = NULL;
+}

@@ -84,7 +84,9 @@ void not_builtin_for_path(char **arr, char **envp, char *argvo, int ii)
 	if (comm_type == 1)
 	{
 		child_pid = fork();
-		if (child_pid == 0)
+		if (child_pid == -1)
+			perror("Could not fork");
+		else if (child_pid == 0)
 		{
 			execute(arr[0], arr);
 		}
@@ -114,13 +116,11 @@ void not_builtin_for_path(char **arr, char **envp, char *argvo, int ii)
 void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)),
 char *argvo, int ii)
 {
-	find_info is_found;
 	char *comm_path;
 	char **new_array;
 	pid_t child_pid2;
 	int status2;
-
-	is_found = find_command(arr[0]);
+	find_info is_found = find_command(arr[0]);
 
 	if (is_found.find_status != 0)
 	{
