@@ -28,14 +28,14 @@ char **envp)
 
 	while (1)
 	{
-		print_prompt();
-		/*signal(SIGINT, free_ctrlc);*/
+		if (isatty(STDIN_FILENO))
+			print_prompt();
 		get_value = getline(&buffer, &size, stdin);
 		if (get_value == -1)
 		{
 			free(buffer);
 			buffer = NULL;
-			exit (0);
+			exit(0);
 		}
 		if (buffer[0] == '\0' || buffer[0] == '\n')
 		{
