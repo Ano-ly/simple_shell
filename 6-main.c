@@ -3,6 +3,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include "main.h"
+#include "main2.h"
+#include <signal.h>
 
 /**
  * main - starting point of program.
@@ -29,6 +31,7 @@ char **envp)
 	while (1)
 	{
 		print_prompt();
+		signal(SIGINT, free_ctrlc);
 		get_value = getline(&buffer, &size, stdin);
 		if (get_value == -1)
 		{
@@ -50,7 +53,6 @@ char **envp)
 		ieie = is_exit_is_env(arr, envp, av[0], i);
 		if (ieie >= 0)
 			exit_ieie(ieie, arr, buffer);
-		/*if (arr[1] == NULL || buffer[0] != 32)*/
 		free(buffer);
 		free(arr);
 		buffer = NULL;
@@ -157,12 +159,12 @@ char *argvo, int ii)
  * Return: void
 */
 
-void free_ctrlc(void)
+void free_ctrlc(int signal __attribute__((unused)))
 {
-	int a;
-
-	a = 4 + 4;
-	a += 7;
+	if (buffer != NULL)
+		free(buffer);
+	buffer = NULL;
+	exit(0);
 }
 
 /**

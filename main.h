@@ -77,7 +77,7 @@ char *argvo, int ii);
 
 void not_builtin_for_non_path(char **arr, char **envp __attribute__((unused)),
 char *argvo, int ii);
-void free_ctrlc(void);
+void free_ctrlc(int signal);
 int noninteractive_main(char *buffer, char **envp, char *argvo,
 int ii);
 
@@ -94,3 +94,4 @@ void exit_ieie(int ieie, char **arr, char *buffer);
 void not_path_frees(char *comm_path, char **new_array, char *dir_loc);
 void find_command_replace(char *path2);
 #endif /*MAIN_H*/
+
