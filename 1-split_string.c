@@ -17,7 +17,7 @@
 
 char **split_string(char *str)
 {
-	char *str_dub;
+	char *str_dup;
 	char *word;
 	char **array;
 	int i;
