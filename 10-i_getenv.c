@@ -109,8 +109,8 @@ int _strlen_env(char *str)
 /**
  * find_envar_start - finds the start of the value of an environment variable
  * @var: environment variable
- * Description: used to find point where the _getenv function
- * will return pointer to
+ * Description: Identifies the  location at which the _getenv function will
+ * return pointer to
  * Return: index location
 */
 
